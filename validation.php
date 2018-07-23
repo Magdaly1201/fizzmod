@@ -2,9 +2,11 @@
 include "database_connection.php";
 
 class Validation{
-    public $numeric = null;
     
+    
+
     public function noEmpty($productId) {
+        
         if($productId == "") {
             print "el campo esta vacio";
         }else {
@@ -21,9 +23,11 @@ class Validation{
     $validation = new Validation();
 
     $noEmpty = $validation->noEmpty($_POST["productId"]);
+    $numeric="";
     if($noEmpty == 1) {
        $numeric = $validation->numeric($_POST["productId"]);
     }
+    
     if ($numeric == 1) {
         return true;
     }

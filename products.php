@@ -1,5 +1,5 @@
 <?php 
-include "database_connection.php";
+include "database_operation.php";
 
 class Products {
 
@@ -7,10 +7,10 @@ class Products {
         $json = file_get_contents("pub/products.json");
         
         $products = json_decode($json,true);
-        $database_connection = new Database_Connection;     
+        $database_operation = new Database_Operation;     
 
         foreach($products as $row) {
-            $conectionDatabase -> insert("products" ,$row); 
+            $database_operation -> insert("products" ,$row); 
         }
         
     }

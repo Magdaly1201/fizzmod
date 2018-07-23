@@ -5,6 +5,9 @@ class Database_Operation {
     
     function queryProduct($table,$id= null) {
 
+        $condition = "";
+        $sql = "" ;
+        $i = "";
         $databaseConnection = new Database_Connection;     
         $connection = $databaseConnection -> connectDatabase();
         
@@ -25,6 +28,24 @@ class Database_Operation {
         echo json_encode($products);
 
         $databaseConnection->disconnectDatabase($connection);
+    }
+    function insert($table,$fileds) {
+        
+        $databaseConnection = new Database_Connection();
+        $connection = $databaseConnection -> connectDatabase();
+        
+        $sql = "";
+        $sql .= "INSERT INTO " .$table;
+        $sql .= " (".implode(", ", array_keys($fileds)).") VALUES ";
+        $sql .= "('".implode("', '", array_values($fileds))."') ";
+
+        $query = mysqli_query($connection,$sql);
+        
+        $databaseConnection -> disconnectDatabase($connection);
+        if($query) {
+            return true;
+        }
+    //print_r($fileds);
     }
 
 }

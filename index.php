@@ -8,7 +8,7 @@
 
 		$(function() {
 			$(".see-all").click(function list() {
-			__ajax("operation_database.php", "")
+			__ajax("database_operation.php", "")
 			.done( function(info){
 				
 				var products = JSON.parse(info);
