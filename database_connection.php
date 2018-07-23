@@ -1,6 +1,6 @@
 <?php
-class Conection_Database {
-    public $conection;
+class Database_Connection {
+    public $connection;
 
     function connectDatabase() {
 
@@ -10,18 +10,18 @@ class Conection_Database {
         $db = "db_EmDElaBVQMc3NVnx";
        
         try{
-            $conection = mysqli_connect( $host, $user, $password, $db );            
-            return $conection;
+            $connection = mysqli_connect( $host, $user, $password, $db );            
+            return $connection;
         }catch(Exception $e){
             echo $e->getMessage();
         }
     
     }
-    function disconnectDatabase($conection) {
+    function disconnectDatabase($connection) {
 
         try{
-            $close = mysqli_close($conection);
-            $conection = null;
+            $close = mysqli_close($connection);
+            $connection = null;
             return $close;
         }catch(Exception $e){
             echo $e->getMessage();
@@ -29,6 +29,6 @@ class Conection_Database {
     }
 }
 
-$conection_database = new Conection_database();
+$databaseConnection = new Database_Connection();
 
 ?>

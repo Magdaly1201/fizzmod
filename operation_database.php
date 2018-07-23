@@ -1,12 +1,12 @@
 <?php
-include "conection_database.php";
+include "database_connection.php";
 
-class Operation_database {
+class Database_Operation {
     
     function queryProduct($table,$id= null) {
 
-        $conectionDatabase = new Conection_Database;     
-        $conection = $conectionDatabase -> connectDatabase();
+        $databaseConnection = new Database_Connection;     
+        $connection = $databaseConnection -> connectDatabase();
         
         $sql .= "SELECT * FROM ".$table. " ".$condition ;
         
@@ -14,18 +14,8 @@ class Operation_database {
             $condition .= "WHERE id = '" .$id."' " ;
             $sql .= " ".$condition ;
         }
-/*
-        $statement = $conection->prepare($sql);
-        $value = $statement->execute();
-
-        if($value) {
-            while($result = $statement->fetch(PDO::FETCH_ASSOC)) {
-                $products["data"][] = $result;
-            }
-        }
-*/
-        
-        $query =  mysqli_query($conection,$sql);
+   
+        $query =  mysqli_query($connection,$sql);
 
         while($row = mysqli_fetch_array($query)) {
             $products[$i] = $row;
@@ -34,13 +24,13 @@ class Operation_database {
         
         echo json_encode($products);
 
-        $conectionDatabase->disconnectDatabase($conection);
+        $databaseConnection->disconnectDatabase($connection);
     }
 
 }
 
-$operation_database = new Operation_database();
-$operation_database->queryProduct("products");
+$DatabaseOperation = new Database_Operation();
+$DatabaseOperation->queryProduct("products");
 
 
 ?>

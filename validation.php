@@ -1,7 +1,8 @@
-<?php
-include "conection_database.php";
+<?php   
+include "database_connection.php";
 
 class Validation{
+    public $numeric = null;
     
     public function noEmpty($productId) {
         if($productId == "") {

@@ -1,0 +1,5 @@
+AuthName "Fizzmod Test"
+AuthType Basic
+AuthUserFile /var/www/html/EmDElaBVQMc3NVnx/backend/.htpasswd
+AuthGroupFile /dev/null
+require valid-user
