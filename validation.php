@@ -29,25 +29,3 @@ class Validation{
 
 
 ?>
-<script>
-    $(function()
-    {
-        $(".consult").click(function(){
- 		var url = "validation.php"; // El script a dónde se realizará la petición.
-    	
-		$.ajax({
-           type: "POST",
-           url: url,
-           data: $("#form").serialize(), // Adjuntar los campos del formulario enviado.
-           success: function(data)
-           {
-               $("#productId").html('');
-               $("#mensaje").html(data); // Mostrar la respuestas del script PHP.
-
-		   }
-         });
-
-    return false; // Evitar ejecutar el submit del formulario.
- 	});
-    });
-</script>

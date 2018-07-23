@@ -6,10 +6,7 @@
 	<script>
 
 		$(function() {
-			list();	
-		})
-	
-		function list() {
+			$(".see-all").click(function list() {
 			__ajax("operation_database.php", "")
 			.done( function(info){
 				
@@ -36,8 +33,9 @@
 				html +=` </table> `
 				$("#result").html( html );
 			})
-		}
-
+		})	
+		
+	
 		function __ajax(url, data) {
 			var ajax = $.ajax({
 				"method": "POST",
@@ -46,7 +44,15 @@
 			})
 			return ajax;
 		}
-		
+		$(".consult").click(function list() {
+			__ajax("validation.php", $("#productId").serialize())
+			.done( function(info){	
+               $("#productId").html("#productId");
+               $("#mensaje").html(info); 
+
+		   })
+         })	
+ 	});
 	</script>
 
 
@@ -88,7 +94,7 @@
 
 		<div class="container">
 			<div id="mensaje"></div>
-				<label for="productId">Id de producto</label>
+				<label for="produ">Id de producto</label>
 				<input type="text" name="productId" id="productId" />
 				<input type="button" class="btn consult" value="CONSULTAR" />
 			
