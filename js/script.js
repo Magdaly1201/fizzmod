@@ -26,7 +26,11 @@ $(function() {
 			html +=` </table> `
 			$("#result").html( html );
 		})
-	});
+		$("#result").html('Cargando');
+
+	}
+);
+	
 	
 	function __ajax(url, data) {
 		var ajax = $.ajax({
@@ -42,5 +46,6 @@ $(function() {
         	$("#productId").html("#productId");
         	$("#mensaje").html(info); 
 		})
+		$("#mensaje").html('Cargando');
 	})	
 })
