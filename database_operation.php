@@ -11,10 +11,10 @@ class Database_Operation {
         $databaseConnection = new Database_Connection;     
         $connection = $databaseConnection -> connectDatabase();
         
-        $sql .= "SELECT * FROM ".$table. " ".$condition ;
-        
+        $sql .= "SELECT * FROM ".$table. " WHERE status = 1 " ;
+        //echo $sql;
         if ($id !== null) {
-            $condition .= "WHERE id = '" .$id."' " ;
+            $condition .= "and  id = '" .$id."' " ;
             $sql .= " ".$condition ;
         }
    
