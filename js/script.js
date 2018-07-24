@@ -28,8 +28,7 @@ $(function() {
 		})
 		$("#result").html('Cargando');
 
-	}
-);
+	});
 	
 	
 	function __ajax(url, data) {
@@ -41,11 +40,34 @@ $(function() {
 		return ajax;
 	}
 	
+
 	$(".consult").click(function list() {
 		__ajax("validation.php", $("#productId").serialize()).done( function(info){	
-        	$("#productId").html("#productId");
-        	$("#mensaje").html(info); 
+			if($.trim(info).length >0) {
+				$("#productId").html("#productId");
+				$("#mensaje").html(info); 
+			}else {
+				console.log(info);
+				test($("#productId").val());
+			}
 		})
+		
 		$("#mensaje").html('Cargando');
 	})	
+
+ 	function test(productId) {
+		$.ajax({
+			type: "POST",
+			url: "database_operation.php",
+			data: {"id":productId},
+			dataType: "json",
+			success: function (result) {
+				console.log(result);
+			},
+			error: function (error) {
+				alert("Lo siento ocurrio un error inesperado");
+			}
+		});
+ 	}
+	
 })

@@ -29,6 +29,7 @@ class Validation{
     }
     
     if ($numeric == 1) {
+        //return json_encode(array('mensaje'=>"hola"));
         return true;
     }
 

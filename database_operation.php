@@ -51,7 +51,7 @@ class Database_Operation {
 }
 
 $DatabaseOperation = new Database_Operation();
-$DatabaseOperation->queryProduct("products");
+$DatabaseOperation->queryProduct("products",$_POST["id"]);
 
 
 ?>
