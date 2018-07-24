@@ -16,6 +16,7 @@ class Products {
     }
 }
 $products = new Products;
+//ejecucion de la funcion addProducts para la inclusion del archivo .json en la bd
 $products -> addProducts(); 
 
 
