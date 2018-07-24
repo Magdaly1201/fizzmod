@@ -19,14 +19,20 @@ class Database_Operation {
         }
    
         $query =  mysqli_query($connection,$sql);
-
-        while($row = mysqli_fetch_array($query)) {
-            $products[$i] = $row;
-            $i++;
+        //echo $sql;
+        print_r(mysql_num_rows($query));
+        if ($query->num_rows == "" ){
+            echo json_encode(array('message'=>"No hay Registros"));
+            //echo json_encode ($message);
+        }else {
+            while($row = mysqli_fetch_array($query)) {
+                $products[$i] = $row;
+                $i++;
+            }
+            echo json_encode($products);
         }
-        
-        echo json_encode($products);
 
+        
         $databaseConnection->disconnectDatabase($connection);
     }
     function insert($table,$fileds) {
@@ -52,6 +58,6 @@ class Database_Operation {
 
 $DatabaseOperation = new Database_Operation();
 $DatabaseOperation->queryProduct("products",$_POST["id"]);
-
+//$DatabaseOperation->queryProduct("products",4);
 
 ?>

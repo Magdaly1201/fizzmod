@@ -45,7 +45,7 @@ $(function() {
 		__ajax("validation.php", $("#productId").serialize()).done( function(info){	
 			if($.trim(info).length >0) {
 				$("#productId").html("#productId");
-				$("#mensaje").html(info); 
+				$("#result").html(info); 
 			}else {
 				consult_id($("#productId").val());
 			}
@@ -55,15 +55,22 @@ $(function() {
 	})	
 
  	function consult_id(productId) {
+		 
 		$.ajax({
 			type: "POST",
 			url: "database_operation.php",
 			data: {"id":productId}
 			,
 			success: function (result) {
-			
 				var products = JSON.parse(result);
-				var html = `<table frame="box" cellpadding="10">
+				//console.log(products);	
+				if(products.message == "No hay Registros") {
+					console.log(result);
+					var html =products.message; 
+					$("#result").html(html);
+				} else {
+					var products = JSON.parse(result);
+					var html = `<table frame="box" cellpadding="10">
 								<tr>
 									<th> id </th>
 									<th> Nombre </th>
@@ -83,7 +90,7 @@ $(function() {
 			
 				html +=` </table> `
 				$("#result").html( html );
-		
+			}
 			},
 			error: function (error) {
 				alert("Lo siento ocurrio un error inesperado");
