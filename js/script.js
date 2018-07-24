@@ -4,6 +4,11 @@ $(function() {
 		__ajax("database_operation.php", "").done( function(info){
 		
 			var products = JSON.parse(info);
+			if(products.message == "No hay Registros") {
+				//console.log(result);
+				var html =products.message; 
+				$("#result").html(html);
+			} else {
 			var html = `<table frame="box" cellpadding="10">
 							<tr>
 								<th> id </th>
@@ -12,7 +17,6 @@ $(function() {
 								<th> fecha Creación </th>
 							</tr>
 						`;
-//	console.log(products);
 			for(var i in products){					
 				html+= `<tr>
 							<td> ${products[i].id} </td>
@@ -25,6 +29,7 @@ $(function() {
 		
 			html +=` </table> `
 			$("#result").html( html );
+		}	
 		})
 		$("#result").html('Cargando...');
 
@@ -63,9 +68,8 @@ $(function() {
 			,
 			success: function (result) {
 				var products = JSON.parse(result);
-				//console.log(products);	
 				if(products.message == "No hay Registros") {
-					console.log(result);
+					//console.log(result);
 					var html =products.message; 
 					$("#result").html(html);
 				} else {

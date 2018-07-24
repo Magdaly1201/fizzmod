@@ -43,7 +43,7 @@
 		</pre>
 
 		<div class="container">
-			<div id="mensaje"></div>
+
 				<label for="produ">Id de producto</label>
 				<input type="text" name="productId" id="productId" />
 				<input type="button" class="btn consult" value="CONSULTAR" />
