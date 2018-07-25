@@ -1,4 +1,4 @@
-<?php
+<?
 include "database_connection.php";
 
 $id="";
@@ -80,7 +80,7 @@ class Database_Operation {
         $DatabaseOperation->deleteProduct("products",$_POST['id_delete']);
         
     }else {
-        $id = (isset($_POST['id_consult'])) ? $_POST['id_consult'] : null ;
+        $id = (isset($_POST['id'])) ? $_POST['id'] : null ;
 //ejecucion del metodo pasandole concatenada la tabla products y reciiendo el id del request ajax
         $DatabaseOperation->consultProduct("products",$id);
     }

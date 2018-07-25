@@ -75,7 +75,7 @@ $(function() {
 		$.ajax({
 			type: "POST",
 			url: "database_operation.php",
-			data: {"id_consult":productId}
+			data: {"id":productId}
 			,
 			success: function (result) {
 				var products = JSON.parse(result);
@@ -94,7 +94,7 @@ $(function() {
 									<th> price </th>
 									<th> fecha Creación </th>
 									<th> Acción </th>
-								</tr>`;
+								</tr>`
 //recorrer el json para creacion de todos los registros existentes 							
 					for(var i in products){					
 						html+= `

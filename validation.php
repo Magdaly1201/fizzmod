@@ -1,4 +1,4 @@
-<?php   
+<?   
 include "database_connection.php";
 
 class Validation{
