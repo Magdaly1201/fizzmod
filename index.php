@@ -43,12 +43,10 @@
 		</pre>
 
 		<div class="container">
-
 				<label for="produ">Id de producto</label>
 				<input type="text" name="productId" id="productId" />
-				<input type="button" class="btn consult" value="CONSULTAR" />
-			
-				<input type="button" class="btn see-all" value="VER TODOS" />
+				<input type="button" class="btn consult" value="CONSULTAR" />									
+				<input type="button" class="btn see-all" value="VER TODOS" /> 
 		</div>
 		<br /><br />
 		<div id="result">

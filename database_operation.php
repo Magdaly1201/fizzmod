@@ -1,17 +1,16 @@
 <?php
 include "database_connection.php";
 
+$id="";
 class Database_Operation {
 
 //funcion para conultar los products por id o sin id
-
-    function queryProduct($table,$id= null) {
+    function consultProduct($table,$id= null) {
 
         $condition = "";
         $sql = "" ;
         $i = "";
         $databaseConnection = new Database_Connection;     
-//creacion de la conexion a la db 
         $connection = $databaseConnection -> connectDatabase();
 
 //creacion de la consulta         
@@ -33,15 +32,12 @@ class Database_Operation {
                 $products[$i] = $row;
                 $i++;
             }
-//retorna el json            
             echo json_encode($products);
         }
-
-//desconecta la bd        
         $databaseConnection->disconnectDatabase($connection);
     }
+
     function insert($table,$fileds) {
-//insercion de los registros a la bd        
         $databaseConnection = new Database_Connection();
 
 //crea la variable de conexion
@@ -55,18 +51,38 @@ class Database_Operation {
 //envia el insert a la bd
         $query = mysqli_query($connection,$sql);
 
-//desconexion de la bd 
         $databaseConnection -> disconnectDatabase($connection);
         if($query) {
             return true;
         }
-    //print_r($fileds);
     }
 
+    function deleteProduct($table,$id) {
+
+        $databaseConnection = new Database_Connection();
+      
+        $connection = $databaseConnection -> connectDatabase();
+        
+        $sql = "";
+        $sql .= "UPDATE " .$table. " SET status = '-1' WHERE id = ".$id ;
+        
+        //echo $sql;
+        $query = mysqli_query($connection,$sql);
+
+        $databaseConnection -> disconnectDatabase($connection);
+        if($query) {
+            return true;
+         }
+    }
 }
-
-$DatabaseOperation = new Database_Operation();
-//ejecucion del metodo pasandole concatenada la tabla products y recibiendo el id del request ajax
-$DatabaseOperation->queryProduct("products",$_POST["id"]);
-
+    $DatabaseOperation = new Database_Operation();
+    if(isset($_POST['id_delete'])) {
+        $DatabaseOperation->deleteProduct("products",$_POST['id_delete']);
+        
+    }else {
+        $id = (isset($_POST['id_consult'])) ? $_POST['id_consult'] : null ;
+//ejecucion del metodo pasandole concatenada la tabla products y reciiendo el id del request ajax
+        $DatabaseOperation->consultProduct("products",$id);
+    }
+     
 ?>
