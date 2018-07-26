@@ -1,4 +1,4 @@
-<?
+<?php
 include "database_operation.php";
 
 class Products {

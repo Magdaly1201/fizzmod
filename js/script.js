@@ -1,4 +1,21 @@
 
+function borrarRegistro(productId){
+	$.ajax({
+		type: "POST",
+		url: "borrar_registro.php",
+		data: {"id":productId}
+		,
+		success: function (result) {
+			$("#fila_"+productId).remove();		
+
+		},
+		error: function (error) {
+			alert("Lo siento ocurrio un error inesperado");
+		}
+	});
+ 
+}
+
 $(function() {
 	$(".see-all").click(function list() {
 		__ajax("database_operation.php", "").done( function(info){
@@ -20,13 +37,13 @@ $(function() {
 								</tr>
 							`;
 				for(var i in products){					
-					html+= `<tr>
+					html+= `<tr id='fila_${products[i].id}'>
 								<td> ${products[i].id} </td>
 								<td> ${products[i].name} </td>
 								<td> ${products[i].price} </td>
 								<td> ${products[i].date_created} </td>
 								<td> 
-									<input type="button" class="delete"	 value="ELIMINAR">  
+									<input type="button" class="delete"	onclick='borrarRegistro(${products[i].id})' value="ELIMINAR">  
 								</td>
 							</tr>
 							`	
@@ -35,6 +52,7 @@ $(function() {
 				html +=` </table> `
 //envia el resultado de la tabla ya creada			
 				$("#result").html( html );
+				////asignarEventoCick();
 			}	
 		})
 //mensaje de cargando mientras realiza la consulta
@@ -63,11 +81,13 @@ $(function() {
 		})	
 	})
 
-	$(".delete").click(function delete_product(productId) {
-			console.log("hey");
-			//$(".delete").remove();
+	function asignarEventoCick(){
+		$(".delete").click(function delete_product(productId) {
+			//console.log("hey");
+			$(".delete").remove();
 		});
-
+	}
+	asignarEventoCick();
 
 //funcion de consultar id	
  	function consult_id(productId) {
@@ -111,8 +131,13 @@ $(function() {
 								</tr>
 								`	
 					}
-					html +=` </table> `
+					html +=` </table> `;
+
+
+					
+
 				$("#result").html( html );
+				asignarEventoCick();
 				}
 			},
 			error: function (error) {

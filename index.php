@@ -47,6 +47,7 @@
 				<input type="text" name="productId" id="productId" />
 				<input type="button" class="btn consult" value="CONSULTAR" />									
 				<input type="button" class="btn see-all" value="VER TODOS" /> 
+				<input type="button" class="delete" value="Eliminar"/> 
 		</div>
 		<br /><br />
 		<div id="result">
