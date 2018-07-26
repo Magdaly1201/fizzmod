@@ -1,9 +1,9 @@
 
-function borrarRegistro(productId){
+function deleteProduct(productId){
 	$.ajax({
 		type: "POST",
-		url: "borrar_registro.php",
-		data: {"id":productId}
+		url: "database_operation.php",
+		data: {"id_delete":productId}
 		,
 		success: function (result) {
 			$("#fila_"+productId).remove();		
@@ -43,7 +43,7 @@ $(function() {
 								<td> ${products[i].price} </td>
 								<td> ${products[i].date_created} </td>
 								<td> 
-									<input type="button" class="delete"	onclick='borrarRegistro(${products[i].id})' value="ELIMINAR">  
+									<input type="button" class="delete"	onclick='deleteProduct(${products[i].id})' value="ELIMINAR">  
 								</td>
 							</tr>
 							`	
@@ -81,13 +81,6 @@ $(function() {
 		})	
 	})
 
-	function asignarEventoCick(){
-		$(".delete").click(function delete_product(productId) {
-			//console.log("hey");
-			$(".delete").remove();
-		});
-	}
-	asignarEventoCick();
 
 //funcion de consultar id	
  	function consult_id(productId) {
@@ -107,37 +100,31 @@ $(function() {
 				} else {
 //si existe registro creacion de la tabla con todos los registros					
 					var products = JSON.parse(result);
-					var html = `<table frame="box" cellpadding="10">
+									var html = `<table frame="box" cellpadding="10">
 								<tr>
 									<th> id </th>
 									<th> Nombre </th>
 									<th> price </th>
 									<th> fecha Creación </th>
 									<th> Acción </th>
-								</tr>`
-//recorrer el json para creacion de todos los registros existentes 							
-					for(var i in products){					
-						html+= `
-							<tr>
-									
-									<td> ${products[i].id} </td>
-									<td> ${products[i].name} </td>
-									<td> ${products[i].price} </td>
-									<td> ${products[i].date_created} </td>
-									<td> 
-										<button class='delete'>ELiminar</button>
-									</td>
-									
 								</tr>
-								`	
-					}
-					html +=` </table> `;
-
-
-					
-
+							`;
+				for(var i in products){					
+					html+= `<tr id='fila_${products[i].id}'>
+								<td> ${products[i].id} </td>
+								<td> ${products[i].name} </td>
+								<td> ${products[i].price} </td>
+								<td> ${products[i].date_created} </td>
+								<td> 
+									<input type="button" class="delete"	onclick='deleteProduct(${products[i].id})' value="ELIMINAR">  
+								</td>
+							</tr>
+							`	
+				}
+		
+				html +=` </table> `
+//envia el resultado de la tabla ya creada			
 				$("#result").html( html );
-				asignarEventoCick();
 				}
 			},
 			error: function (error) {
